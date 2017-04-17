@@ -72,10 +72,10 @@ if (is_array($ret) and isset($ret['filename'], $ret['data']) and
     include 'templates/error.tpl';
 }
 // scripts
-include 'templates/html_script.tpl';
-include 'scripts/clock.js';
-include 'scripts/timeinput.js'
-include 'templates/html_script_end.tpl';
+// include 'templates/html_script.tpl';
+// include 'scripts/clock.js';
+// include 'scripts/timeinput.js'
+// include 'templates/html_script_end.tpl';
 // HTML footer laden
 include 'templates/html_footer.tpl';  // Zeug wie </body> und </html>
 ?>

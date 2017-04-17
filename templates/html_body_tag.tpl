@@ -1,1 +1,2 @@
-<body onload="startTime()" onload="pickTime()">
+<body onload="startTime()">
+
