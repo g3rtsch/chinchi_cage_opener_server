@@ -1,0 +1,38 @@
+body {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+div.logo
+{
+color: #cccc99;
+}
+div.testmenu
+{
+  vertical-align:top;
+}
+#wrapper
+{
+    width: 100%;
+	margin: 0px;
+}
+table {
+}
+td.menu
+{
+  vertical-align:top;
+  A:link {text-decoration: none; color: black;}
+  A:visited {text-decoration: none; color: black;}
+  A:active {text-decoration: none; color: blue;}
+  A:hover {text-decoration: none; color: blue; background-color: grey;}
+}
+td.menu_short {
+  A:link {text-decoration: none; color: black;}
+  A:visited {text-decoration: none; color: black;}
+  A:active {text-decoration: none; color: blue;}
+  A:hover {text-decoration: none; color: blue; background-color: grey;}
+}
+td.content {
+	min-width:280px;
+	text-decoration: none; color: black;
+}
