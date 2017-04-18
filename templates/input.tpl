@@ -1,14 +1,13 @@
-<form action="index.php?section=Input" method="post">
+<form id="control" action="index.php?section=Input" method="post">
     <fieldset>
         <legend>Open</legend>
         <p class="info">Open</p>
         <input type="submit" name="open" value="open" />
-        <input type="submit" name="close" value="close" />
 	<p>
-	  Select hour: <select id="starthrs"></select>
-	  minute: <select id="startmins"></select>
+	  Select hour: <select name="hour" id="starthrs"></select>
+	  minute: <select name="minutes" id="startmins"></select>
 	</p> &nbsp;
-	<input type="button" id="settime" value="set Time"> &nbsp; <a style="color: Red;" id="error"></a>
+	<input type="button" name="settime" id="settime" value="set Time"> &nbsp;
 	<p id="stime"></p>
 	<script>
 	  selectTime()

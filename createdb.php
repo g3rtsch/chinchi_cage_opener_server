@@ -17,6 +17,8 @@
       CREATE TABLE CHINCHILLA
       (ID INT PRIMARY KEY     NOT NULL,
       STATUS         INT      NOT NULL,
+      HOUR           INT, 
+      MINUTES        INT, 
       LOG	         CHAR(50));
 EOF;
 

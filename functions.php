@@ -33,6 +33,14 @@ function showInfo($msg) {
     return $ret;
 }
 
+function prep_sql($on, $log, $hour, $minutes) {
+    $ret =<<<EOF
+INSERT INTO CHINCHILLA (STATUS,LOG,HOUR,MINUTES)
+VALUES ('$on', '$log', '$hour', '$minutes');
+EOF;
+    return $ret;
+}
+
 /*
 function wlog() {
 	$sql =<<<EOF

@@ -25,6 +25,9 @@ function selectTime() {
     document.getElementById("settime").onclick = function() {
 	var starthrs = parseInt(ddlValue("starthrs"));
 	var startmins = parseInt(ddlValue("startmins"));
-	document.getElementById("stime").innerHTML = starthrs + ":" + startmins; 
+	// document.getElementById("stime").innerHTML = starthrs + ":" + startmins; 
+	document.getElementById("control").submit();
+	var l = document.getElementById("control").elements.namedItem("hour").value;
+	document.getElementById("stime").innerHTML = l;
     }
 }

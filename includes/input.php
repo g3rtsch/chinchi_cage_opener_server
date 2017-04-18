@@ -17,6 +17,8 @@ $sql_close =<<<EOF
 	VALUES ('$close', '$log');
 EOF;
 
+$on = "on";
+
 // if ('POST' == $_SERVER['REQUEST_METHOD']) {
 //     if (!isset($_POST['open'])){
 //         return INVALID_FORM;
@@ -38,6 +40,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 		}
 		$db->close();
 		return showInfo('will open...');
+        // return showInfo($_POST['open']);
 	}
 
 	if (isset($_POST['close'])){
@@ -48,6 +51,21 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 		$db->close();
 		return showInfo('will close...');
 	}
+    if (isset($_POST['hour']) && isset($_POST['minutes'])) {
+        $hour = $_POST['hour'];
+        $minutes = $_POST['minutes'];
+        $sql_settime = prep_sql($on, $log, $hour, $minutes); // prep_sql() in functions.php
+        $r = $db->exec($sql_settime);
+        if(!$r){
+            return showinfo($db->lastErrorMsg());
+        }
+        $db->close();
+        $op = $_POST['hour'] . ":" . $_POST['minutes'];
+        return showInfo($op);
+    }
+    // if (!isset($_POST['close']) && !isset($_POST['open'])) {
+    //     return showInfo(print_r($_POST));
+    // }
 }
 
 return $ret;
