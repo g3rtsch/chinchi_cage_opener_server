@@ -24,8 +24,11 @@ while($row = $r->fetchArray(SQLITE3_ASSOC) ){;
 	$ret['data']['id'] = $row['ID'];
 	$ret['data']['Timestamp'][$id] = $row['Timestamp'];
 	$ret['data']['STATUS'][$id] = $row['STATUS'];
+	$ret['data']['LOG'][$id] = $row['LOG'];
+	$ret['data']['HOUR'][$id] = $row['HOUR'];
+	$ret['data']['MINUTES'][$id] = $row['MINUTES'];
 
 }
 
-return $ret;
+RETURN $ret;
 ?>

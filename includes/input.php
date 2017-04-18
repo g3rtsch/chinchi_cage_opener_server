@@ -7,8 +7,8 @@ $ret['data'] = array();
 $open = "open";
 $log = "user_input";
 $sql_open =<<<EOF
-	INSERT INTO CHINCHILLA (STATUS,LOG)
-	VALUES ('$open', '$log');
+	INSERT INTO CHINCHILLA (STATUS,LOG, HOUR, MINUTES)
+	VALUES ('$open', '$log', 'None', 'None');
 EOF;
 
 $close = "close";
@@ -33,7 +33,13 @@ $on = "on";
 // }
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
+    if (!isset($_POST['open']) && !isset($_POST['close']) && !isset($_POST['hour']) && !isset($_POST['minutes'])) {
+        return INVALID_FORM;
+    }
 	if (isset($_POST['open'])){
+        if (!is_string($_POST['open'])) {
+            return INVALID_FORM;
+        }
 		$r = $db->exec($sql_open);
 		if(!$r){
 			return showinfo($db->lastErrorMsg());
@@ -42,8 +48,10 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 		return showInfo('will open...');
         // return showInfo($_POST['open']);
 	}
-
 	if (isset($_POST['close'])){
+        if (!is_string($_POST['close'])) {
+            return INVALID_FORM;
+        }
 		$r = $db->exec($sql_close);
 		if(!$r){
 			return showinfo($db->lastErrorMsg());
@@ -52,6 +60,9 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 		return showInfo('will close...');
 	}
     if (isset($_POST['hour']) && isset($_POST['minutes'])) {
+        if (!is_string($_POST['hour']) && !is_string($_POST['minutes'])) {
+            return INVALID_FORM;
+        }
         $hour = $_POST['hour'];
         $minutes = $_POST['minutes'];
         $sql_settime = prep_sql($on, $log, $hour, $minutes); // prep_sql() in functions.php
@@ -63,9 +74,6 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         $op = $_POST['hour'] . ":" . $_POST['minutes'];
         return showInfo($op);
     }
-    // if (!isset($_POST['close']) && !isset($_POST['open'])) {
-    //     return showInfo(print_r($_POST));
-    // }
 }
 
 return $ret;
