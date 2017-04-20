@@ -18,6 +18,10 @@ $sql_close =<<<EOF
 EOF;
 
 $on = "on";
+$sql_off =<<<EOF
+	INSERT INTO CHINCHILLA (STATUS,LOG, HOUR, MINUTES)
+	VALUES ('$on', '$log', 'None', 'None');
+EOF;
 
 // if ('POST' == $_SERVER['REQUEST_METHOD']) {
 //     if (!isset($_POST['open'])){
@@ -59,6 +63,19 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 		$db->close();
 		return showInfo('will close...');
 	}
+
+	if (isset($_POST['off'])){
+        if (!is_string($_POST['off'])) {
+            return INVALID_FORM;
+        }
+		$r = $db->exec($sql_off);
+		if(!$r){
+			return showinfo($db->lastErrorMsg());
+		}
+		$db->close();
+		return showInfo('timer off');
+	}
+
     if (isset($_POST['hour']) && isset($_POST['minutes'])) {
         if (!is_string($_POST['hour']) && !is_string($_POST['minutes'])) {
             return INVALID_FORM;
