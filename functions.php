@@ -14,6 +14,41 @@
  *         wenn er eingeloggt ist oder ein string wenn eine Fehlermeldung
  *         auftrat.
  */
+function getUserID($userdb) {
+    if (!is_object($userdb)) {
+        return false;
+    }
+    if (!($userdb instanceof MySQLi)) {
+        return false;
+    }
+    if (!isset($_COOKIE['UserID'], $_COOKIE['Password'])) {
+        return false;
+    }
+    $sql = 'SELECT
+                ID
+            FROM
+                User
+            WHERE
+                ID = ? AND
+                Password = ?';
+    $stmt = $userdb->prepare($sql);
+    if (!$stmt) {
+        return $userdb->error;
+    }
+    $stmt->bind_param('is', $_COOKIE['UserID'], $_COOKIE['Password']);
+    if (!$stmt->execute()) {
+        $str = $stmt->error;
+        $stmt->close();
+        return $str;
+    }
+    $stmt->bind_result($UserID);
+    if (!$stmt->fetch()) {
+        $stmt->close();
+        return false;
+    }
+    $stmt->close();
+    return $UserID;
+}
 
 /**
  * Erzeugt ein Array für das Infomessage-Template.

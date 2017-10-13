@@ -7,10 +7,16 @@ include 'constants.php';
 include 'functions.php';
 include 'classes.php';
 
+// requires Mysql database for usersdb
+// $userdb = @new Mysqli(); 
 
 $db = new MyDB();
 if(!$db){
 	$ret = $db->lastErrorMsg();
+} else if (mysqli_connect_errno()) {
+	$ret = 'Konnte keine Verbindung zu Datenbank aufbauen, MySQL meldete: '.mysqli_connect_error();
+} else if (is_string($error = getUserID($userdb))) { // String, also ein MySQL Fehler
+    $ret = $error; // die Fehlermeldung in $ret speichern, damit sie angezeigt wird.
 } else {
 
 	$ret = 1; // speichert den rückgabewert von include, standardwert 1

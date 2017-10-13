@@ -1,4 +1,7 @@
 <?php
+if (!$UserID = getUserID($userdb)) {
+    return NOT_LOGGED_IN;
+}
 $ret = array();
 $ret['filename'] = 'input.tpl';
 $ret['data'] = array();
